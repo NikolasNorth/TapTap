@@ -11,6 +11,7 @@ namespace UnityCore {
             public static PageController instance;
 
             public bool debug;
+            public bool persist;
             public PageType entryPage;
             public Page[] pages;
 
@@ -20,20 +21,19 @@ namespace UnityCore {
 
 #region Unity Functions
             private void Awake() {
-                if (!instance) {
+                if (!instance && persist) {
                     instance = this;
-                    m_Pages = new Hashtable();
-                    m_OnList = new List<Page>();
-                    m_OffList = new List<Page>();
-                    RegisterAllPages();
 
-                    if (entryPage != PageType.None) {
-                        TurnPageOn(entryPage);
-                    }
-                    
                     DontDestroyOnLoad(gameObject);
-                } else {
-                    Destroy(gameObject);
+                }
+                
+                m_Pages = new Hashtable();
+                m_OnList = new List<Page>();
+                m_OffList = new List<Page>();
+                RegisterAllPages();
+
+                if (entryPage != PageType.None) {
+                    TurnPageOn(entryPage);
                 }
             }
 #endregion

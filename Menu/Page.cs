@@ -39,6 +39,7 @@ namespace UnityCore {
 #region Unity Functions
             private void OnEnable() {
                 CheckAnimatorIntegrity();
+                OnPageEnabled();
             }
 #endregion
 
@@ -102,6 +103,11 @@ namespace UnityCore {
 
             private void LogWarning(string _msg) {
                 Debug.LogWarning("[Page]: "+_msg);
+            }
+
+            protected virtual void OnPageEnabled()
+            {
+                
             }
 #endregion
         }
